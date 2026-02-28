@@ -1,0 +1,131 @@
+// CSS Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-secondary;
+  font-size: $font-size-body;
+  line-height: 1.6;
+  color: $color-text-primary;
+  background-color: $color-background;
+  min-height: 100vh;
+}
+
+// Remove default margin
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+// Remove list styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Set default link styles
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Make images responsive
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Inherit fonts for form elements
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove default button styles
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+// Remove default fieldset styles
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Improve media defaults
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Ensure clickable elements have pointer cursor
+a,
+button,
+label,
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+// Remove tap highlight on mobile
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Focus visible styles
+:focus-visible {
+  outline: 2px solid $color-accent;
+  outline-offset: 2px;
+}
+
+// Remove default spinner for number inputs
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,337 @@
+// Component Styles
+
+// Buttons
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--ghost {
+    @include button-ghost;
+  }
+  
+  &--sm {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-small;
+  }
+  
+  &--lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-body;
+  }
+  
+  &--icon {
+    padding: $spacing-sm;
+    border-radius: $radius-full;
+  }
+  
+  &__loading {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+// Cards
+.card {
+  @include card;
+  
+  &__header {
+    margin-bottom: $spacing-md;
+  }
+  
+  &__title {
+    font-size: $font-size-h4;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-xs;
+  }
+  
+  &__subtitle {
+    font-size: $font-size-small;
+    color: $color-text-secondary;
+  }
+  
+  &__body {
+    color: $color-text-secondary;
+  }
+  
+  &__footer {
+    margin-top: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border;
+  }
+}
+
+// Badge
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  
+  &--beginner {
+    background: rgba($color-beginner, 0.15);
+    color: $color-beginner;
+  }
+  
+  &--intermediate {
+    background: rgba($color-intermediate, 0.15);
+    color: $color-intermediate;
+  }
+  
+  &--advanced {
+    background: rgba($color-advanced, 0.15);
+    color: $color-advanced;
+  }
+}
+
+// Input
+.input {
+  @include input-base;
+  
+  &--error {
+    border-color: $color-error;
+    
+    &:focus {
+      border-color: $color-error;
+      box-shadow: 0 0 0 2px rgba($color-error, 0.2);
+    }
+  }
+}
+
+// Textarea
+.textarea {
+  @include input-base;
+  resize: vertical;
+  min-height: 100px;
+}
+
+// Select
+.select {
+  @include input-base;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a0a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  padding-right: $spacing-xl;
+}
+
+// Table
+.table-container {
+  overflow-x: auto;
+  @include custom-scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-small;
+  
+  th, td {
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+    border-bottom: 1px solid $color-border;
+  }
+  
+  th {
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    background: $color-surface;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  tr {
+    &:nth-child(even) {
+      background: rgba($color-surface, 0.5);
+    }
+    
+    &:hover {
+      background: rgba($color-accent, 0.05);
+    }
+  }
+  
+  td {
+    font-family: $font-primary;
+  }
+}
+
+// Loading spinner
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid $color-border;
+  border-top-color: $color-accent;
+  border-radius: $radius-full;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Modal
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  @include flex-center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+  
+  &__content {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    padding: $spacing-xl;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    @include custom-scrollbar;
+    animation: slideUp 0.3s ease;
+  }
+  
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__title {
+    font-size: $font-size-h4;
+  }
+  
+  &__close {
+    @include button-ghost;
+    padding: $spacing-xs;
+    font-size: $font-size-h3;
+  }
+  
+  &__footer {
+    margin-top: $spacing-lg;
+    @include flex-between;
+    gap: $spacing-md;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Toast/Notification
+.toast {
+  position: fixed;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  z-index: $z-tooltip;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-lg;
+  animation: slideInRight 0.3s ease;
+  
+  &--success {
+    border-color: $color-success;
+  }
+  
+  &--error {
+    border-color: $color-error;
+  }
+  
+  &--warning {
+    border-color: $color-warning;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Empty state
+.empty-state {
+  @include flex-center;
+  @include flex-column;
+  padding: $spacing-xxl;
+  text-align: center;
+  color: $color-text-secondary;
+  
+  &__icon {
+    font-size: 3rem;
+    margin-bottom: $spacing-md;
+    opacity: 0.5;
+  }
+  
+  &__title {
+    font-size: $font-size-h4;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__description {
+    font-size: $font-size-small;
+    max-width: 300px;
+  }
+}
+
+// Difficulty indicator
+.difficulty {
+  display: flex;
+  gap: $spacing-xs;
+  
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background: $color-border;
+    
+    &--active {
+      background: $color-accent;
+    }
+    
+    &--beginner {
+      background: $color-beginner;
+    }
+    
+    &--intermediate {
+      background: $color-intermediate;
+    }
+    
+    &--advanced {
+      background: $color-advanced;
+    }
+  }
+}

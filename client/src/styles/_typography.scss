@@ -1,0 +1,156 @@
+// Typography Styles
+
+// Headings
+h1, .h1 {
+  font-family: $font-secondary;
+  font-size: $font-size-h1;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  
+  @include tablet {
+    font-size: calc(#{$font-size-h1} * 1.1);
+  }
+}
+
+h2, .h2 {
+  font-family: $font-secondary;
+  font-size: $font-size-h2;
+  font-weight: $font-weight-semibold;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  
+  @include tablet {
+    font-size: calc(#{$font-size-h2} * 1.1);
+  }
+}
+
+h3, .h3 {
+  font-family: $font-secondary;
+  font-size: $font-size-h3;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+}
+
+h4, .h4 {
+  font-family: $font-secondary;
+  font-size: $font-size-h4;
+  font-weight: $font-weight-medium;
+  line-height: 1.4;
+}
+
+// Body text
+body, .body {
+  font-family: $font-secondary;
+  font-size: $font-size-body;
+  font-weight: $font-weight-regular;
+  line-height: 1.6;
+}
+
+.body-small {
+  font-size: $font-size-small;
+}
+
+.body-xs {
+  font-size: $font-size-xs;
+}
+
+// Code/Monospace
+code, .code {
+  font-family: $font-primary;
+  font-size: 0.9em;
+  background: $color-surface;
+  padding: 0.1em 0.4em;
+  border-radius: $radius-sm;
+  color: $color-accent;
+}
+
+pre, .pre {
+  font-family: $font-primary;
+  font-size: $font-size-small;
+  line-height: 1.5;
+  background: $color-surface;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  @include custom-scrollbar;
+}
+
+// Text colors
+.text-primary {
+  color: $color-text-primary;
+}
+
+.text-secondary {
+  color: $color-text-secondary;
+}
+
+.text-accent {
+  color: $color-accent;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+.text-warning {
+  color: $color-warning;
+}
+
+.text-error {
+  color: $color-error;
+}
+
+// Text weights
+.text-light {
+  font-weight: $font-weight-light;
+}
+
+.text-regular {
+  font-weight: $font-weight-regular;
+}
+
+.text-medium {
+  font-weight: $font-weight-medium;
+}
+
+.text-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+// Text alignment
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Text transformations
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+// Links
+.link {
+  color: $color-accent;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: lighten($color-accent, 10%);
+  }
+}

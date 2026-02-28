@@ -1,0 +1,483 @@
+// Page Styles
+
+// Home Page
+.home {
+  &__hero {
+    text-align: center;
+    padding: $spacing-xxl 0;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba($color-accent, 0.1) 0%, transparent 70%);
+      z-index: -1;
+    }
+  }
+  
+  &__title {
+    font-size: $font-size-h1;
+    margin-bottom: $spacing-md;
+    background: linear-gradient(135deg, $color-text-primary 0%, $color-accent 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    @include tablet {
+      font-size: calc(#{$font-size-h1} * 1.3);
+    }
+  }
+  
+  &__subtitle {
+    font-size: $font-size-body;
+    color: $color-text-secondary;
+    max-width: 500px;
+    margin: 0 auto;
+    
+    @include tablet {
+      font-size: $font-size-h4;
+    }
+  }
+  
+  &__filters {
+    @include flex-center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+  }
+  
+  &__filter-btn {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-small;
+    border-radius: $radius-full;
+    background: $color-surface;
+    color: $color-text-secondary;
+    border: 1px solid $color-border;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: $color-accent;
+      color: $color-text-primary;
+    }
+    
+    &--active {
+      background: $color-accent;
+      color: white;
+      border-color: $color-accent;
+    }
+  }
+}
+
+// Assignment Card
+.assignment-card {
+  @include card;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: $color-border;
+    transition: background $transition-base;
+  }
+  
+  &--beginner::before {
+    background: $color-beginner;
+  }
+  
+  &--intermediate::before {
+    background: $color-intermediate;
+  }
+  
+  &--advanced::before {
+    background: $color-advanced;
+  }
+  
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-md;
+  }
+  
+  &__title {
+    font-size: $font-size-h4;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    @include truncate;
+  }
+  
+  &__description {
+    font-size: $font-size-small;
+    color: $color-text-secondary;
+    @include line-clamp(3);
+    margin-bottom: $spacing-md;
+  }
+  
+  &__footer {
+    @include flex-between;
+    font-size: $font-size-xs;
+  }
+  
+  &__difficulty {
+    text-transform: capitalize;
+  }
+}
+
+// Assignment Page
+.assignment {
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+  }
+  
+  &__back {
+    @include button-ghost;
+    font-size: $font-size-small;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  &__title {
+    font-size: $font-size-h3;
+    font-weight: $font-weight-semibold;
+  }
+  
+  &__layout {
+    display: grid;
+    gap: $spacing-lg;
+    
+    @include desktop {
+      grid-template-columns: 40% 60%;
+    }
+  }
+  
+  &__left-panel {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+  
+  &__right-panel {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+}
+
+// Question Panel
+.question-panel {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  
+  &__title {
+    font-size: $font-size-h4;
+    margin-bottom: $spacing-md;
+    color: $color-accent;
+  }
+  
+  &__description {
+    color: $color-text-secondary;
+    margin-bottom: $spacing-md;
+    line-height: 1.7;
+  }
+  
+  &__requirements {
+    background: rgba($color-warning, 0.1);
+    border-left: 3px solid $color-warning;
+    padding: $spacing-md;
+    border-radius: 0 $radius-sm $radius-sm 0;
+    margin-bottom: $spacing-md;
+    
+    h4 {
+      font-size: $font-size-small;
+      color: $color-warning;
+      margin-bottom: $spacing-xs;
+    }
+    
+    p {
+      font-size: $font-size-small;
+      color: $color-text-secondary;
+    }
+  }
+  
+  &__output {
+    h4 {
+      font-size: $font-size-small;
+      color: $color-success;
+      margin-bottom: $spacing-sm;
+    }
+  }
+  
+  &__output-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+  
+  &__output-field {
+    font-size: $font-size-xs;
+    font-family: $font-primary;
+    background: rgba($color-success, 0.1);
+    color: $color-success;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+  }
+}
+
+// Sample Data Viewer
+.sample-data {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-md $spacing-lg;
+    background: rgba($color-border, 0.3);
+    cursor: pointer;
+    
+    &:hover {
+      background: rgba($color-border, 0.5);
+    }
+  }
+  
+  &__title {
+    font-size: $font-size-body;
+    font-weight: $font-weight-medium;
+  }
+  
+  &__toggle {
+    transition: transform $transition-fast;
+    
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+  
+  &__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $transition-base;
+    
+    &--open {
+      max-height: 600px;
+      overflow-y: auto;
+      @include custom-scrollbar;
+    }
+  }
+  
+  &__table-wrapper {
+    padding: $spacing-md;
+  }
+  
+  &__table-name {
+    font-family: $font-primary;
+    font-size: $font-size-small;
+    color: $color-accent;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// SQL Editor
+.sql-editor {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-md $spacing-lg;
+    background: rgba($color-border, 0.3);
+  }
+  
+  &__title {
+    font-size: $font-size-body;
+    font-weight: $font-weight-medium;
+  }
+  
+  &__wrapper {
+    height: 250px;
+    
+    @include tablet {
+      height: 300px;
+    }
+  }
+  
+  &__footer {
+    @include flex-between;
+    padding: $spacing-md $spacing-lg;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    border-top: 1px solid $color-border;
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+  }
+}
+
+// Results Panel
+.results {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  min-height: 200px;
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-md $spacing-lg;
+    background: rgba($color-border, 0.3);
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+  
+  &__title {
+    font-size: $font-size-body;
+    font-weight: $font-weight-medium;
+  }
+  
+  &__stats {
+    display: flex;
+    gap: $spacing-md;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+  }
+  
+  &__stat {
+    @include flex-center;
+    gap: $spacing-xs;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+  &__content {
+    padding: $spacing-md;
+    max-height: 300px;
+    overflow: auto;
+    @include custom-scrollbar;
+    
+    &--error {
+      background: rgba($color-error, 0.05);
+    }
+  }
+  
+  &__error {
+    color: $color-error;
+    font-family: $font-primary;
+    font-size: $font-size-small;
+    padding: $spacing-md;
+    background: rgba($color-error, 0.1);
+    border-radius: $radius-md;
+    border-left: 3px solid $color-error;
+  }
+  
+  &__empty {
+    @include flex-center;
+    @include flex-column;
+    height: 200px;
+    color: $color-text-secondary;
+    text-align: center;
+    
+    svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: $spacing-md;
+      opacity: 0.5;
+    }
+  }
+  
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: $font-size-small;
+    
+    th, td {
+      padding: $spacing-sm;
+      text-align: left;
+      border-bottom: 1px solid $color-border;
+      font-family: $font-primary;
+    }
+    
+    th {
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+      background: $color-background;
+      position: sticky;
+      top: 0;
+    }
+    
+    tr:hover {
+      background: rgba($color-accent, 0.05);
+    }
+  }
+}
+
+// Hint Modal Content
+.hint-content {
+  &__level {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__level-btn {
+    flex: 1;
+    padding: $spacing-sm;
+    font-size: $font-size-small;
+    border-radius: $radius-md;
+    background: $color-background;
+    color: $color-text-secondary;
+    border: 1px solid $color-border;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: $color-accent;
+    }
+    
+    &--active {
+      background: $color-accent;
+      color: white;
+      border-color: $color-accent;
+    }
+  }
+  
+  &__text {
+    font-size: $font-size-body;
+    line-height: 1.7;
+    color: $color-text-primary;
+    padding: $spacing-md;
+    background: $color-background;
+    border-radius: $radius-md;
+    border-left: 3px solid $color-accent;
+    min-height: 100px;
+  }
+  
+  &__disclaimer {
+    margin-top: $spacing-md;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    font-style: italic;
+  }
+}
