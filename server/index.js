@@ -21,10 +21,20 @@ app.use(express.urlencoded({ extended: true }));
 const assignmentsRouter = require('./routes/assignments');
 const queryRouter = require('./routes/query');
 const hintsRouter = require('./routes/hints');
+const path = require('path');
 
 app.use('/api/assignments', assignmentsRouter);
 app.use('/api/query', queryRouter);
 app.use('/api/hints', hintsRouter);
+
+// Serve static files from the React app
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  });
+}
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -53,7 +63,8 @@ async function startServer() {
 
     app.listen(PORT, () => {
       console.log(`\n🚀 CipherSQLStudio server running on http://localhost:${PORT}`);
-      console.log(`   API: http://localhost:${PORT}/api`);
+      console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`   Static Files Serving: ${process.env.NODE_ENV === 'production' ? 'ENABLED' : 'DISABLED'}`);
     });
   } catch (error) {
     console.error('Failed to start server:', error);

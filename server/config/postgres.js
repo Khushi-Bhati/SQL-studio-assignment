@@ -1,17 +1,20 @@
 const { Pool } = require('pg');
 
-const PG_HOST = process.env.PG_HOST || 'localhost';
-const PG_PORT = process.env.PG_PORT || 5432;
-const PG_USER = process.env.PG_USER || 'postgres';
-const PG_PASSWORD = process.env.PG_PASSWORD || 'postgres';
-const PG_DATABASE = process.env.PG_DATABASE || 'ciphersqlstudio';
+const poolConfig = process.env.DATABASE_URL
+  ? {
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.DATABASE_URL.includes('render.com') ? { rejectUnauthorized: false } : false
+  }
+  : {
+    host: process.env.PG_HOST || 'localhost',
+    port: process.env.PG_PORT || 5432,
+    user: process.env.PG_USER || 'postgres',
+    password: process.env.PG_PASSWORD || 'postgres',
+    database: process.env.PG_DATABASE || 'ciphersqlstudio',
+  };
 
 const pool = new Pool({
-  host: PG_HOST,
-  port: PG_PORT,
-  user: PG_USER,
-  password: PG_PASSWORD,
-  database: PG_DATABASE,
+  ...poolConfig,
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 10000,
@@ -40,11 +43,11 @@ async function executeQuery(query, timeout = 10000) {
   try {
     // Set statement timeout
     await client.query(`SET statement_timeout = ${timeout}`);
-    
+
     const startTime = Date.now();
     const result = await client.query(query);
     const executionTime = Date.now() - startTime;
-    
+
     return {
       success: true,
       rows: result.rows,
@@ -74,7 +77,7 @@ async function getTableSchema(tableName) {
     WHERE table_name = $1
     ORDER BY ordinal_position
   `;
-  
+
   try {
     const result = await pool.query(query, [tableName]);
     return result.rows;
@@ -89,7 +92,7 @@ async function getTableData(tableName, limit = 20) {
     // Sanitize table name to prevent SQL injection
     const safeTableName = tableName.replace(/[^a-zA-Z0-9_]/g, '');
     const query = `SELECT * FROM ${safeTableName} LIMIT ${parseInt(limit, 10)}`;
-    
+
     const result = await pool.query(query);
     return result.rows;
   } catch (error) {
